@@ -11,3 +11,20 @@ function toggleTheme() {
 const savedTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 
+// Load footer dynamically
+async function loadFooter() {
+    try {
+        const response = await fetch('footer.html');
+        const footerHTML = await response.text();
+        document.getElementById('footer-placeholder').innerHTML = footerHTML;
+    } catch (error) {
+        console.error('Error loading footer:', error);
+    }
+}
+
+// Load footer when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadFooter);
+} else {
+    loadFooter();
+}
