@@ -34,6 +34,7 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* Navigation */
 nav {
     background: var(--bg-secondary);
     border-bottom: 1px solid var(--border);
@@ -84,24 +85,67 @@ nav a:hover {
     cursor: pointer;
     transition: all 0.3s ease;
     color: var(--text-primary);
+    font-size: 1rem;
 }
 
 .theme-toggle:hover {
     transform: scale(1.05);
 }
 
+/* Container */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
 }
 
-.hero {
-    padding: 4rem 0;
-    text-align: center;
+/* Content Links */
+p a, 
+li a {
+    color: inherit;
+    font-weight: 700;
+    text-decoration: none;
 }
 
-.hero h1 {
+p a:hover, 
+li a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+}
+
+
+/* Hero Section */
+.hero {
+    padding: 4rem 0;
+}
+
+.hero .container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.profile-photo {
+    width: 300px;
+    height: 300px;
+    border-radius: 60%;
+    object-fit: cover;
+    border: 4px solid var(--accent);
+    box-shadow: 0 8px 24px var(--shadow);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+}
+
+.profile-photo:hover {
+    transform: scale(1.05);
+}
+
+.hero-content {
+    flex: 1;
+    text-align: left;
+}
+
+.hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
     background: linear-gradient(135deg, var(--accent), #00cc88);
@@ -110,17 +154,18 @@ nav a:hover {
     background-clip: text;
 }
 
-.hero p {
+.hero-content p {
     font-size: 1.3rem;
     color: var(--text-secondary);
     margin-bottom: 2rem;
 }
 
 .hero .cta {
-    display: inline-flex;
+    display: flex;
     gap: 1rem;
 }
 
+/* Buttons */
 .btn {
     padding: 0.8rem 2rem;
     border-radius: 8px;
@@ -143,6 +188,7 @@ nav a:hover {
 .btn-secondary {
     border: 2px solid var(--accent);
     color: var(--accent);
+    background: transparent;
 }
 
 .btn-secondary:hover {
@@ -150,6 +196,7 @@ nav a:hover {
     color: white;
 }
 
+/* Sections */
 section {
     padding: 4rem 0;
 }
@@ -160,6 +207,7 @@ section h2 {
     text-align: center;
 }
 
+/* About Section */
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -186,7 +234,9 @@ section h2 {
     border-color: var(--accent);
 }
 
-.experience-item, .education-item {
+/* Experience and Education Items */
+.experience-item, 
+.education-item {
     background: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 12px;
@@ -195,11 +245,13 @@ section h2 {
     transition: transform 0.3s ease;
 }
 
-.experience-item:hover, .education-item:hover {
+.experience-item:hover, 
+.education-item:hover {
     transform: translateX(8px);
 }
 
-.experience-item h3, .education-item h3 {
+.experience-item h3, 
+.education-item h3 {
     color: var(--accent);
     margin-bottom: 0.5rem;
 }
@@ -210,6 +262,7 @@ section h2 {
     margin-bottom: 0.5rem;
 }
 
+/* Footer */
 footer {
     background: var(--bg-secondary);
     padding: 2rem 0;
@@ -229,41 +282,43 @@ footer {
     color: var(--text-primary);
     font-size: 1.5rem;
     transition: color 0.3s ease;
+    text-decoration: none;
 }
 
 .social-links a:hover {
     color: var(--accent);
 }
 
+/* Responsive Design */
 @media (max-width: 768px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-    }
-
     nav ul {
         gap: 1rem;
     }
 
-    .hero h1 {
+    .hero .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-content h1 {
         font-size: 2rem;
     }
 
     .hero .cta {
         flex-direction: column;
+        align-items: center;
     }
 
     .profile-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 2rem;
-    border: 4px solid var(--accent);
-    box-shadow: 0 8px 24px var(--shadow);
-    transition: transform 0.3s ease;
+        width: 250px;
+        height: 25  0px;
     }
 
-    .profile-photo:hover {
-        transform: scale(1.05);
+    .about-grid {
+        grid-template-columns: 1fr;
     }
 }

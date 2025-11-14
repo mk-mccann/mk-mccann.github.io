@@ -7,10 +7,6 @@ function toggleTheme() {
     localStorage.setItem('theme', newTheme);
 }
 
-// Load saved theme on page load
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-
 // Load footer dynamically
 async function loadFooter() {
     try {
@@ -21,6 +17,10 @@ async function loadFooter() {
         console.error('Error loading footer:', error);
     }
 }
+
+// Load saved theme on page load
+const savedTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', savedTheme);
 
 // Load footer when DOM is ready
 if (document.readyState === 'loading') {
