@@ -9,10 +9,15 @@ function toggleTheme() {
 
 // Load footer dynamically
 async function loadFooter() {
+    const footerPlaceholder = document.getElementById('footer-placeholder');
+    if (!footerPlaceholder) {
+        return;
+    }
+
     try {
         const response = await fetch('footer.html');
         const footerHTML = await response.text();
-        document.getElementById('footer-placeholder').innerHTML = footerHTML;
+        footerPlaceholder.innerHTML = footerHTML;
     } catch (error) {
         console.error('Error loading footer:', error);
     }

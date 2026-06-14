@@ -1,0 +1,13 @@
+---
+layout: default
+---
+
+<section>
+    <div class="container">
+        <article class="experience-item" style="margin-top: 2rem;">
+            <p class="date">{{ page.date | date: "%B %-d, %Y" }}</p>
+            <h1 style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--accent);">{{ page.title }}</h1>
+            {{ content }}
+        </article>
+    </div>
+</section>

@@ -77,6 +77,11 @@ nav a:hover {
     color: var(--accent);
 }
 
+nav a.nav-active {
+    color: var(--accent);
+    font-weight: 700;
+}
+
 .theme-toggle {
     background: var(--bg-primary);
     border: 1px solid var(--border);
