@@ -1,0 +1,8 @@
+{% if include.caption %}
+<figure class="post-figure">
+  <img src="{{ include.src | relative_url }}" alt="{{ include.alt }}" loading="lazy" class="post-image">
+  <figcaption>{{ include.caption }}</figcaption>
+</figure>
+{% else %}
+<img src="{{ include.src | relative_url }}" alt="{{ include.alt }}" loading="lazy" class="post-image">
+{% endif %}
