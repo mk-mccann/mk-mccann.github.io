@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Real-Time VR System for Freely Moving Rodents - Matt McCann</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="logo"><a href="index.html">Matt McCann</a></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><button class="theme-toggle" onclick="toggleTheme()">🌓</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="blog-hero">
+        <div class="container">
+            <a href="projects.html" class="back-link">← Back to Projects</a>
+            <h1>Building a Real-Time VR System for Freely Moving Rodents</h1>
+            <div class="blog-meta">
+                <span>Max Planck Institute for Biological Intelligence</span>
+                <span>&bull;</span>
+                <span>PhD Research, 2018–2024</span>
+            </div>
+            <div class="blog-tags">
+                <span class="skill-tag">Unity3D</span>
+                <span class="skill-tag">C#</span>
+                <span class="skill-tag">HLSL</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Optitrack</span>
+            </div>
+        </div>
+    </section>
+
+    <article class="blog-content">
+        <p>One of the core problems in systems neuroscience is that the brain didn't evolve to sit still. Most of
+            what we know about how the visual cortex processes the world comes from experiments where an animal is
+            head-fixed, staring at a monitor, while a much richer, embodied reality full of self-motion, vestibular
+            input, and environmental feedback is stripped away. My PhD work centered on building a system that gets 
+            closer to bringing that reality back: a real-time, closed-loop virtual reality platform that lets a 
+            freely moving mouse explore an immersive 3D visual environment while we track exactly where it is, where 
+            it's looking, and what its brain is doing in response.</p>
+
+        <p>This meant the system couldn't just render pretty graphics — it had to track a small, fast-moving animal
+            in 3D space at high speed, and re-render a perspective-correct scene from that animal's point of view
+            fast enough that the animal never noticed the lag. Getting from motion capture data to correct image
+            on a complex projection surface in under 20 milliseconds, every frame, turned out to be the hardest and
+            most interesting part of the whole project.</p>
+
+        <h2>Huge help from Drago Guggiana-Nilo</h2>
+        <p>I would like to thank Drago Guggiana-Nilo for his invaluable guidance and support throughout this project.
+            Drago was my supervisor for the duration of my PhD, providing guidance, feedback, and support at every 
+            stage of the project, and was my co-builder for most of this. Drago got the VR system hardware built and 
+            running while I pushed its capabilities to the limit.
+        </p>
+
+        <h2>Standing on ratCAVE's shoulders</h2>
+        <p>I didn't start from a blank page. The system builds on <a href="https://github.com/ratcave/ratcave"><strong>ratCAVE</strong></a>, an open-source rodent VR
+            framework from Del Grosso et al. (2017, 2019). The core idea — track an animal's head, project onto a
+            physically modeled arena, and warp the rendered scene to that animal's perspective every frame — is
+            theirs. My major contribution was ripping out ratCAVE's Python-based OpenGL rendering engine and
+            replacing it with <strong>Unity3D</strong>. That's a bigger change than it sounds: it traded a
+            lightweight scientific rendering stack for a commercial game engine, in exchange for GPU shader access,
+            a much larger development ecosystem, and — critically — first-class compatibility with the motion
+            capture hardware we depended on.</p>
+
+        <h2>Hardware: tracking a mouse's head at 360 FPS</h2>
+        <p>The whole system is only as good as its tracking, so a large fraction of the engineering effort lived in
+            the physical rig rather than the code.</p>
+
+        <table class="spec-table">
+            <tr><th>Rendering PC</th><td>Intel Xeon E5-1650, 64 GB RAM, Nvidia GeForce GTX 1080 Ti (11 GB VRAM), Windows 10</td></tr>
+            <tr><th>Projector</th><td>ProPixx high-speed LED projector (VPixx Technologies)</td></tr>
+            <tr><th>Motion capture</th><td>12× Optitrack Prime 17W cameras at 360 FPS, Motive software, ~100 μm 3D spatial resolution</td></tr>
+            <tr><th>Arena</th><td>50 cm × 100 cm, 60° angled walls (50 cm tall), matte white PVC-lined wood</td></tr>
+            <tr><th>Triggers/DAQ</th><td>National Instruments BNC-2110, processed with custom Python software</td></tr>
+        </table>
+
+        <figure class="blog-figure">
+            <img src="assets/arena.jpg" alt="The VR arena, with angled PVC-lined walls and retroreflective tracking markers along the top edge.">
+            <figcaption>The VR arena under the overhead projector and motion capture cameras.</figcaption>
+        </figure>
+
+        <p>The VR arena itself is a physical wood enclosure with angled walls, lined with matte white PVC film to
+            minimize reflections from the overhead projector (and make it easier to clean up after the mice). Six
+            wooden spheres wrapped in retroreflective tape are glued along its top edge — two per long side and one
+            on each short end — so the motion capture system can track the arena itself as a rigid body.</p>
+
+        <figure class="blog-figure">
+            <img src="assets/headtracker.jpg" alt="Custom 3D-printed head tracker with retroreflective markers on each prong.">
+            <figcaption>The custom 3D-printed head tracker, marked with retroreflective tape for Optitrack tracking.</figcaption>
+        </figure>
+
+        <p>To track the mouse, I designed a custom 3D-printed head tracker (printed on an Ultimaker 3 Extended) with
+            retroreflective tape on the tips of four prongs. In Motive, the tracked points get bundled into a
+            <strong>rigid body</strong> — a fixed spatial arrangement of markers with a defined forward vector and
+            pivot point. I aligned that forward vector with the mouse's locomotion direction and translated the pivot
+            point to sit roughly between the animal's eyes, so that rotations reported by the tracking system
+            actually corresponded to head rotations, not an arbitrary point on the tracker. For head-fixed
+            experiments the same trick applies to a static head-bar mount, since accurate stimulus orientation still
+            depends on knowing exactly where "the eyes" are relative to the arena.</p>
+
+        <p>The 12 Optitrack cameras are split across two roles: two are mounted directly above the arena, flanking
+            the projector, for top-down capture; the other ten are mounted at 1 m height around the arena, angled so
+            their combined fields of view cover the whole space with no blind spots. Six of the twelve have their
+            infrared filters removed, which lets them double as regular cameras for 3D-scanning the physical arena
+            itself — more on that below.</p>
+
+        <h2>Modeling the arena and warping the image onto it</h2>
+        <p>A Unity scene is three-dimensional, but a video projector only outputs a flat 2D image. To make a 2D
+            projection look correct on the arena's angled, non-planar walls, I needed two things: an accurate 3D
+            model of the physical arena, and a way to map the rendered image onto that model's actual geometry.</p>
+
+        <p>The 3D model came from the motion capture rig itself: a grid of white circles was projected onto the
+            arena surface and moved around while the IR-filter-free cameras captured its position in 3D, building up
+            a point cloud of the arena's interior surface that I exported as a 3D object. I imported that model into
+            Unity and aligned its pivot point to match the pivot of the arena's tracked rigid body so the virtual and 
+            physical arenas stay locked together.</p>
+
+        <p>I then used the open-source <strong>Unity Projection Mapping</strong> package to
+            calibrate the actual warp: seven points on the virtual arena — the four bottom corners and three top
+            corners — get manually mapped to their corresponding points on the physical arena. That produces a
+            projection matrix that's saved once and loaded at runtime, warping every subsequent frame so it lands
+            correctly on the physical surface regardless of the arena's odd angled-wall geometry.</p>
+
+        <h2>Rendering from the mouse's point of view: cube mapping</h2>
+        <p>Knowing where the projector needs to warp its image is
+            only half the problem — the other half is generating the right image for wherever the mouse's
+            head currently is and however it's currently oriented, every single frame, as the animal moves freely
+            around the arena.</p>
+
+        <p>This is solved with <strong>cube mapping</strong> (Greene, 1986), a technique more commonly used for
+            real-time reflections in video games. On every frame, a custom script renders the entire 3D scene onto
+            the six faces of an imaginary cube centered on the head tracker's live position. That cube map is then
+            projected onto the inner surface of the virtual arena model. The effect: from the head tracker's exact
+            vantage point, the visual scene appears as though it's being displayed on a screen directly in front of
+            the animal — flat, consistent, and free of distortion — despite the fact that it's actually being
+            projected onto physically angled walls from a fixed point 2 meters overhead. As the animal moves and
+            turns its head, the cube map recenters and the illusion holds.</p>
+
+        <div class="callout">
+            Closed-loop latency — from a marker's position being detected by the motion capture system to the
+            corresponding frame being rendered — came in under <strong>20 ms</strong>, with cameras tracking at 360
+            FPS and the scene rendering at 120 FPS. Drago measured this by mounting a retroreflective marker to a running PC
+            cooling fan and projecting a tracked dot next to it in real time; a single tracking camera captured both
+            the marker and the dot, and the frame-by-frame pixel distance between them converts directly to a time
+            lag once you know the camera's frame rate. That's fast enough that the rendered world keeps pace with the 
+            animal's head rather than trailing behind it.
+        </div>
+
+        <h2>Custom shaders for visual stimuli</h2>
+        <figure class="blog-figure">
+            <img src="assets/exp-still.jpg" alt="Still frame from an experiment showing the drifting Gabor patch stimulus rendered in the VR arena.">
+            <figcaption>A drifting Gabor patch stimulus rendered live in the arena during an experiment.</figcaption>
+        </figure>
+        <p>Beyond the arena and projection-mapping infrastructure, HLSL shaders were how I generated the actual
+            visual stimuli used in experiments. The main stimulus was a spherically corrected, drifting sinusoidal
+            grating (a 3D Gabor patch): a 30 cm-radius sphere centered on the head tracker, with a custom shader
+            generating drifting stripes with adjustable color, spatial frequency, temporal frequency, and direction,
+            and a second shader applying a Gaussian alpha mask to soften its edges. The whole sphere gets rotated 30°
+            up from the tracked horizontal plane so the stimulus sits within a mouse's binocular visual field, and
+            its position follows the animal's head while its rotation stays locked to the tracked horizontal plane —
+            so the grating's orientation and drift direction stay stable in head-centered coordinates no matter how
+            the animal moves. Standard experimental blocks presented 12 grating directions, evenly spaced across
+            ±180°, at 2 cycles/s temporal and 0.04 cycles/° spatial frequency, ten repetitions each.</p>
+
+        <h2>Tying it to the rest of the rig</h2>
+        <p>The VR engine didn't operate in isolation. Custom Python software drove experiment control and talked to
+            the peripheral hardware over the NI DAQ: an overhead CMOS camera captured
+            pose-estimation video at 30 FPS during freely moving sessions, an identical camera with 780 nm IR
+            illumination recorded eye movements during head-fixed sessions, and a rotary encoder on the running wheel
+            converted to running speed in post-processing. None of this is glamorous, but a VR system is only useful
+            to neuroscience if its stimulus timing can be tied precisely to physiology and behavior data recorded
+            through entirely separate pipelines.</p>
+
+        <h2>Pairing VR with a wireless miniscope</h2>
+        <figure class="blog-figure">
+            <img src="assets/mouse_w_tracker.jpg" alt="A mouse wearing the head tracker and a wirefree UCLA V3 miniscope.">
+            <figcaption>A mouse wearing the head tracker and wirefree miniscope.</figcaption>
+        </figure>
+        <p>Tracking an animal's head and rendering the right image is only half the point — the other half is tying
+            all of it to what the brain is actually doing. For that, animals wore a UCLA <strong>version 3
+            miniscope</strong>, a miniaturized one-photon microscope for in-vivo calcium imagings. 
+            The idea of shrinking a microscope down to something an animal can carry goes back over twenty
+            years (Helmchen et al., 2001), and it's seen a real resurgence over the last decade or so from both
+            commercial vendors and the open-source neuroscience community. These miniscopes carry their own onboard
+            LED excitation source and a CMOS imaging sensor to record emitted fluorescence, with fields of view on
+            the order of a few hundred microns — small and light enough that an animal can roam around while wearing
+            one.</p>
+
+        <p>We specifically used the <strong>wirefree</strong> variant of the UCLA V3 miniscope, which swaps the usual
+            fiber-optic and data tether for a small battery and an onboard SD card that saves data locally. That
+            choice mattered for two reasons that go straight back to the goals of the VR system: a trailing cable
+            would have cast shadows on the projected visual stimulus as the animal moved through the arena, and
+            cable slack introduces drag and drag on the head that bias natural movement. The tradeoff is weight, 
+            since the battery adds mass the animal has to carry, but once acclimated, an adult male mouse 
+            wearing the wirefree miniscope can move and behave freely with no tethers at all, letting us record calcium 
+            activity from visual cortex with precisely tracked head position and closed-loop visual stimuli.</p>
+
+        <p>In the end this choice still introduced torque on the mouse - since the battery and scope are relatively top-heavy
+            I noticed that the animals needed to compensate for the additional weight. I ended up doing a kind of strength 
+            training routine while acclimating the mice, where I 3D printed small counterweights to acclimate them to the weight bit
+            by bit over the course of handling and acclimation. By the time they were fully acclimated, the mice were able to carry 
+            the wirefree miniscope for the duration of the experiment.
+        </p>
+
+        <h2>Where this ended up</h2>
+        <p>The system underpins the bulk of my dissertation work on visual stimulus tuning in mouse primary visual
+            cortex under freely moving conditions, and it also ended up in front of a much wider audience than I
+            expected — it was featured in Werner Herzog's documentary <em>Theatre of Thought</em> and on the ZDF
+            program <em>Terra Xplore</em>.</p>
+
+        <p>Unfortunately, the current lab version of the codebase isn't public due to institutional restrictions, but
+            an earlier version of the platform is available on GitHub, and there's a short video demo showing the
+            system tracking and rendering in real time.</p>
+
+        <div class="blog-cta">
+            <a href="https://youtu.be/kuo9TrsrGUE?si=Mxbzablv1pPawCkC" class="btn btn-primary">Video Demo</a>
+            <a href="https://github.com/drguggiana/VR_platform" class="btn btn-secondary">GitHub</a>
+            <a href="https://doi.org/10.5282/edoc.34734" class="btn btn-secondary">Dissertation</a>
+        </div>
+    </article>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
