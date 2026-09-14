@@ -40,29 +40,29 @@
     <article class="blog-content">
         <p>One of the core problems in systems neuroscience is that the brain didn't evolve to sit still. Most of
             what we know about how the visual cortex processes the world comes from experiments where an animal is
-            head-fixed, staring at a monitor, while a much richer, embodied reality full of self-motion, vestibular
+            head-fixed and staring at a computer monitor while a much richer, embodied reality full of self-motion, vestibular
             input, and environmental feedback is stripped away. My PhD work centered on building a system that gets 
-            closer to bringing that reality back: a real-time, closed-loop virtual reality platform that lets a 
+            closer to bridging the lab and the real world: a real-time, closed-loop virtual reality platform that lets a 
             freely moving mouse explore an immersive 3D visual environment while we track exactly where it is, where 
             it's looking, and what its brain is doing in response.</p>
 
         <p>This meant the system couldn't just render pretty graphics — it had to track a small, fast-moving animal
             in 3D space at high speed, and re-render a perspective-correct scene from that animal's point of view
             fast enough that the animal never noticed the lag. Getting from motion capture data to correct image
-            on a complex projection surface in under 20 milliseconds, every frame, turned out to be the hardest and
+            on a complex projection surface as fast as possible turned out to be the hardest and
             most interesting part of the whole project.</p>
 
         <h2>Huge help from Drago Guggiana-Nilo</h2>
         <p>I would like to thank Drago Guggiana-Nilo for his invaluable guidance and support throughout this project.
             Drago was my supervisor for the duration of my PhD, providing guidance, feedback, and support at every 
             stage of the project, and was my co-builder for most of this. Drago got the VR system hardware built and 
-            running while I pushed its capabilities to the limit.
+            running before I pushed its capabilities to the limit.
         </p>
 
         <h2>Standing on ratCAVE's shoulders</h2>
-        <p>I didn't start from a blank page. The system builds on <a href="https://github.com/ratcave/ratcave"><strong>ratCAVE</strong></a>, an open-source rodent VR
-            framework from Del Grosso et al. (2017, 2019). The core idea — track an animal's head, project onto a
-            physically modeled arena, and warp the rendered scene to that animal's perspective every frame — is
+        <p>I didn't start from a blank page. The system builds on <a href="https://github.com/ratcave/ratcave"><strong>ratCAVE</strong></a>, 
+            an open-source rodent VR framework from Del Grosso et al. (2017, 2019). The core idea — track an animal's head, 
+            project onto a physically modeled arena, and warp the rendered scene to that animal's perspective every frame — is
             theirs. My major contribution was ripping out ratCAVE's Python-based OpenGL rendering engine and
             replacing it with <strong>Unity3D</strong>. That's a bigger change than it sounds: it traded a
             lightweight scientific rendering stack for a commercial game engine, in exchange for GPU shader access,
@@ -86,10 +86,10 @@
             <figcaption>The VR arena under the overhead projector and motion capture cameras.</figcaption>
         </figure>
 
-        <p>The VR arena itself is a physical wood enclosure with angled walls, lined with matte white PVC film to
+        <p>The VR arena itself is a wood enclosure with angled walls, lined with a matte white PVC film to
             minimize reflections from the overhead projector (and make it easier to clean up after the mice). Six
-            wooden spheres wrapped in retroreflective tape are glued along its top edge — two per long side and one
-            on each short end — so the motion capture system can track the arena itself as a rigid body.</p>
+            wooden spheres wrapped in retroreflective tape are glued along its top edge - two per long side and one
+            on each short end - so the motion capture system can track the arena itself as a rigid body.</p>
 
         <figure class="blog-figure">
             <img src="assets/headtracker.jpg" alt="Custom 3D-printed head tracker with retroreflective markers on each prong.">
@@ -113,7 +113,7 @@
 
         <h2>Modeling the arena and warping the image onto it</h2>
         <p>A Unity scene is three-dimensional, but a video projector only outputs a flat 2D image. To make a 2D
-            projection look correct on the arena's angled, non-planar walls, I needed two things: an accurate 3D
+            projection look correct on the arena's angled walls, I needed two things: an accurate 3D
             model of the physical arena, and a way to map the rendered image onto that model's actual geometry.</p>
 
         <p>The 3D model came from the motion capture rig itself: a grid of white circles was projected onto the
@@ -123,7 +123,7 @@
             physical arenas stay locked together.</p>
 
         <p>I then used the open-source <strong>Unity Projection Mapping</strong> package to
-            calibrate the actual warp: seven points on the virtual arena — the four bottom corners and three top
+            calibrate the actual warp: seven points on the virtual arena - the four bottom corners and three of the top
             corners — get manually mapped to their corresponding points on the physical arena. That produces a
             projection matrix that's saved once and loaded at runtime, warping every subsequent frame so it lands
             correctly on the physical surface regardless of the arena's odd angled-wall geometry.</p>
@@ -145,9 +145,9 @@
 
         <div class="callout">
             Closed-loop latency — from a marker's position being detected by the motion capture system to the
-            corresponding frame being rendered — came in under <strong>20 ms</strong>, with cameras tracking at 360
+            corresponding frame being rendered — came in under 20ms (<strong>~17 ms</strong>), with cameras tracking at 360
             FPS and the scene rendering at 120 FPS. Drago measured this by mounting a retroreflective marker to a running PC
-            cooling fan and projecting a tracked dot next to it in real time; a single tracking camera captured both
+            cooling fan and projecting a tracked dot next to it in real time; a single high-speed tracking camera captured both
             the marker and the dot, and the frame-by-frame pixel distance between them converts directly to a time
             lag once you know the camera's frame rate. That's fast enough that the rendered world keeps pace with the 
             animal's head rather than trailing behind it.
@@ -184,40 +184,38 @@
             <figcaption>A mouse wearing the head tracker and wirefree miniscope.</figcaption>
         </figure>
         <p>Tracking an animal's head and rendering the right image is only half the point — the other half is tying
-            all of it to what the brain is actually doing. For that, animals wore a UCLA <strong>version 3
-            miniscope</strong>, a miniaturized one-photon microscope for in-vivo calcium imagings. 
-            The idea of shrinking a microscope down to something an animal can carry goes back over twenty
-            years (Helmchen et al., 2001), and it's seen a real resurgence over the last decade or so from both
-            commercial vendors and the open-source neuroscience community. These miniscopes carry their own onboard
-            LED excitation source and a CMOS imaging sensor to record emitted fluorescence, with fields of view on
-            the order of a few hundred microns — small and light enough that an animal can roam around while wearing
-            one.</p>
+            all of it to what the brain is actually doing. For that, animals wore a wirefree UCLA V3
+            miniscope, a miniaturized one-photon microscope for in-vivo calcium imagings. 
+            These miniscopes carry their own onboard LED excitation source and a CMOS imaging sensor to record emitted 
+            fluorescence, with fields of view on the order of a few hundred microns — small and light enough that 
+            an animal can roam around while wearing one.</p>
 
-        <p>We specifically used the <strong>wirefree</strong> variant of the UCLA V3 miniscope, which swaps the usual
+        <p>We specifically used the wirefree variant of the UCLA V3 miniscope, which swaps the usual
             fiber-optic and data tether for a small battery and an onboard SD card that saves data locally. That
-            choice mattered for two reasons that go straight back to the goals of the VR system: a trailing cable
+            choice mattered for two reasons: a trailing cable
             would have cast shadows on the projected visual stimulus as the animal moved through the arena, and
-            cable slack introduces drag and drag on the head that bias natural movement. The tradeoff is weight, 
+            cable slack introduces torque and drag on the head that bias natural movement. The tradeoff is weight, 
             since the battery adds mass the animal has to carry, but once acclimated, an adult male mouse 
             wearing the wirefree miniscope can move and behave freely with no tethers at all, letting us record calcium 
             activity from visual cortex with precisely tracked head position and closed-loop visual stimuli.</p>
 
-        <p>In the end this choice still introduced torque on the mouse - since the battery and scope are relatively top-heavy
-            I noticed that the animals needed to compensate for the additional weight. I ended up doing a kind of strength 
-            training routine while acclimating the mice, where I 3D printed small counterweights to acclimate them to the weight bit
-            by bit over the course of handling and acclimation. By the time they were fully acclimated, the mice were able to carry 
-            the wirefree miniscope for the duration of the experiment.
-        </p>
-
+        <div class="callout">
+            In the end this, choice still introduced torque on the mouse since the battery and scope are top-heavy.
+            I noticed that the animals needed to compensate for the additional weight, and this may explain some of the quirks in my data. 
+            I ended up doing a kind of strength training routine to acclimate the mice where I 3D printed small counterweights 
+            to get them used to the weight bit by bit over the course of handling. By the time they were fully 
+            acclimated, the mice were able to carry the wirefree miniscope for the duration of the experiment.
+        </div>
+      
         <h2>Where this ended up</h2>
         <p>The system underpins the bulk of my dissertation work on visual stimulus tuning in mouse primary visual
             cortex under freely moving conditions, and it also ended up in front of a much wider audience than I
-            expected — it was featured in Werner Herzog's documentary <em>Theatre of Thought</em> and on the ZDF
+            expected - it was featured in Werner Herzog's documentary <em>Theatre of Thought</em> and on the ZDF
             program <em>Terra Xplore</em>.</p>
 
-        <p>Unfortunately, the current lab version of the codebase isn't public due to institutional restrictions, but
-            an earlier version of the platform is available on GitHub, and there's a short video demo showing the
-            system tracking and rendering in real time.</p>
+        <p>Unfortunately, the current lab version of the codebase isn't public due, but an earlier version of the 
+            platform is available on GitHub, and there's a short video demo showing the system tracking and rendering 
+            in real time.</p>
 
         <div class="blog-cta">
             <a href="https://youtu.be/kuo9TrsrGUE?si=Mxbzablv1pPawCkC" class="btn btn-primary">Video Demo</a>
