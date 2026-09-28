@@ -11,6 +11,7 @@
     --text-secondary: #666666;
     --accent: #0066cc;
     --accent-hover: #0052a3;
+    --accent-2: #00cc88;
     --border: #e0e0e0;
     --shadow: rgba(0, 0, 0, 0.1);
 }
@@ -22,6 +23,7 @@
     --text-secondary: #b0b0b0;
     --accent: #4d9fff;
     --accent-hover: #66b3ff;
+    --accent-2: #00cc88;
     --border: #404040;
     --shadow: rgba(0, 0, 0, 0.3);
 }
@@ -157,7 +159,7 @@ h3 a:hover {
 .hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--accent), #00cc88);
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -216,12 +218,121 @@ section h2 {
     text-align: center;
 }
 
+section h2::after {
+    content: "";
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin: 0.75rem auto 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+[id] {
+    scroll-margin-top: 80px;
+}
+
+.section-lede {
+    max-width: 640px;
+    margin: -0.75rem auto 2.5rem;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+}
+
 /* About Section */
 .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
     gap: 3rem;
+    align-items: start;
+}
+
+.about-text p {
+    font-size: 1.05rem;
+    margin-bottom: 1.1rem;
+}
+
+.about-text p:last-child {
+    margin-bottom: 0;
+}
+
+.about-text .about-lede {
+    font-size: 1.25rem;
+    line-height: 1.5;
+}
+
+.glance-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+}
+
+.glance-card h3 {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.glance-list {
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.glance-list li {
+    display: flex;
+    gap: 0.9rem;
     align-items: center;
+    line-height: 1.35;
+}
+
+.glance-list strong {
+    display: block;
+    font-weight: 600;
+}
+
+.glance-list div span {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.glance-icon,
+.service-icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.glance-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+.glance-icon svg,
+.service-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.75;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.glance-card .skill-tag {
+    background: var(--bg-primary);
+    font-size: 0.9rem;
 }
 
 .skills {
@@ -241,6 +352,137 @@ section h2 {
 .skill-tag:hover {
     transform: translateY(-2px);
     border-color: var(--accent);
+}
+
+/* Services Section */
+#services {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+}
+
+.service-card {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.service-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+    box-shadow: 0 12px 28px var(--shadow);
+}
+
+.service-card:hover::before {
+    transform: scaleX(1);
+}
+
+.service-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    margin-bottom: 0.25rem;
+}
+
+.service-icon svg {
+    width: 24px;
+    height: 24px;
+}
+
+.service-card h3 {
+    font-size: 1.15rem;
+    line-height: 1.3;
+}
+
+.service-card p {
+    flex-grow: 1;
+    color: var(--text-secondary);
+}
+
+.service-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+
+.service-tags span {
+    font-size: 0.78rem;
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+}
+
+.service-proof {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.service-proof .arrow {
+    transition: transform 0.3s ease;
+}
+
+.service-proof:hover .arrow,
+.service-card:hover .service-proof .arrow {
+    transform: translateX(4px);
+}
+
+.services-cta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    padding: 1.5rem 1.75rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+}
+
+.services-cta p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+}
+
+.services-cta strong {
+    color: var(--text-primary);
 }
 
 /* Experience and Education Items */
@@ -446,9 +688,44 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
+    .container,
+    nav .container {
+        padding: 0 1.25rem;
+    }
+
+    nav .container {
+        flex-wrap: wrap;
+        row-gap: 0.5rem;
+    }
+
+    nav .logo {
+        font-size: 1.05rem;
+        white-space: nowrap;
+    }
+
     nav ul {
-        gap: 1rem;
+        gap: 0.75rem;
+    }
+
+    nav ul a {
+        font-size: 0.95rem;
+    }
+
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        padding: 0;
+    }
+
+    .blog-content {
+        padding: 3rem 1.25rem;
     }
 
     .hero .container {
@@ -471,11 +748,20 @@ footer {
 
     .profile-photo {
         width: 250px;
-        height: 25  0px;
+        height: 250px;
     }
 
     .about-grid {
         grid-template-columns: 1fr;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .services-cta {
+        flex-direction: column;
+        text-align: center;
     }
 
     .blog-hero h1 {

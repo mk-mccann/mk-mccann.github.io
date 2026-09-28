@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Matthew McCann - CV & Portfolio</title>
+    <meta name="description" content="Matt McCann, PhD: neuroscientist and engineer offering experimental design, custom research systems, neural data analysis, and machine learning for research teams.">
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -27,7 +28,7 @@
             <img src="assets/profile-photo.jpg" alt="It's me, Matt!" class="profile-photo">
             <div class="hero-content">
                 <h1>Hi, I'm Matt</h1>
-                <p>Scientific Consultant | Problem Solver | Tech for Nueroscience and Sustainabilty</p>
+                <p>Neuroscience PhD &amp; engineer. I help research teams design experiments, build custom systems, and turn complex data into answers.</p>
                 <div class="cta">
                     <a href="projects.html" class="btn btn-primary">View Projects</a>
                     <a href="#contact" class="btn btn-secondary">Get In Touch</a>
@@ -41,32 +42,168 @@
         <div class="container">
             <h2>About Me</h2>
             <div class="about-grid">
-                <div>
-                    <p style="margin-bottom: 1rem;">
-                        I'm a neuroscientist and engineer with a skill set spanning the full data stack - 
-                        from electronics development through machine learning and analytics. 
-                        PhD trained as a neuroscientist, I look at challenges from first principles to find the best actionable solutions.
+                <div class="about-text">
+                    <p class="about-lede">
+                        I'm a neuroscientist and engineer who likes building the tools that make hard experiments possible.
+                        I trained in biomedical engineering at Duke, then spent eight years at two Max Planck institutes,
+                        finishing a PhD in neurobiology at the Max Planck Institute for Biological Intelligence in Munich.
                     </p>
                     <p>
-                        Currently focused on ML applications for environmental conservation and monitoring. 
+                        For my PhD, I built a real-time <a href="vr-system.html">virtual reality system for freely moving mice</a>
+                        that tracked an animal's head at 360 frames per second and redrew its world in under 20 milliseconds.
+                        I then used machine learning to ask how the visual cortex combines what an animal sees with how it moves.
+                        That work took me across the full data stack, from electronics and motion capture through computer vision,
+                        statistical modeling, and terabyte-scale analysis pipelines.
+                    </p>
+                    <p>
+                        Today I work with research teams as an independent consultant through DeepBio Analytics. I'm based in
+                        Boston, Massachusetts, and work with labs and companies everywhere, remotely or in person. I look at
+                        challenges from first principles to find solutions that work in practice. If you're stuck on a technical
+                        problem or want to think an idea through, I'd love to hear from you.
                     </p>
                 </div>
-                <div>
-                    <h3 style="margin-bottom: 1rem;">Core Stack</h3>
+
+                <aside class="glance-card">
+                    <h3>At a Glance</h3>
+                    <ul class="glance-list">
+                        <li>
+                            <span class="glance-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+                            </span>
+                            <div>
+                                <strong>PhD, Neurobiology</strong>
+                                <span>Max Planck Institute for Biological Intelligence &amp; LMU Munich</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="glance-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                            </span>
+                            <div>
+                                <strong>8+ years of Max Planck research</strong>
+                                <span>Munich, Germany &amp; Jupiter, Florida</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="glance-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+                            </span>
+                            <div>
+                                <strong>Published in Current Biology</strong>
+                                <span>Neural coding and learning in visual cortex</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="glance-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m16 10 6-3v10l-6-3"/></svg>
+                            </span>
+                            <div>
+                                <strong>Featured in Werner Herzog's <em>Theatre of Thought</em></strong>
+                                <span>and ZDF's Terra Xplore</span>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="glance-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+                            </span>
+                            <div>
+                                <strong>Based in Boston, Massachusetts</strong>
+                                <span>Working with teams everywhere, remotely or in person</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h3>Core Stack</h3>
                     <div class="skills">
                         <span class="skill-tag">Python</span>
                         <span class="skill-tag">PyTorch</span>
                         <span class="skill-tag">SciKit-learn</span>
-                        <span class="skill-tag">SciKit-vision</span>
+                        <span class="skill-tag">SciKit-image</span>
                         <span class="skill-tag">LangChain</span>
                         <span class="skill-tag">OpenCV</span>
                         <span class="skill-tag">C#</span>
                         <span class="skill-tag">Unity3D</span>
                         <span class="skill-tag">Git</span>
                         <span class="skill-tag">SQL</span>
-
                     </div>
-                </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>What I Can Do</h2>
+            <p class="section-lede">
+                I partner with academic labs and biotech teams on anything from a one-off analysis to a complete
+                experimental platform.
+            </p>
+
+            <div class="services-grid">
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M9 3h6"/><path d="M10 3v6.5L4.6 18.2A2 2 0 0 0 6.3 21h11.4a2 2 0 0 0 1.7-2.8L14 9.5V3"/><path d="M7.5 15h9"/></svg>
+                    </div>
+                    <h3>Experimental Design &amp; Scientific Consulting</h3>
+                    <p>A PhD-trained second opinion on protocols, controls, and analysis plans, ideally before the data is collected rather than after.</p>
+                    <div class="service-tags"><span>Study design</span><span>Statistics</span><span>Protocol review</span></div>
+                    <a class="service-proof" href="https://doi.org/10.5282/edoc.34734">Read my dissertation <span class="arrow">&rarr;</span></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="0.5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg>
+                    </div>
+                    <h3>Custom Rigs &amp; Real-Time Systems</h3>
+                    <p>Closed-loop experimental platforms from sensor to screen: motion capture, VR, hardware sync, and data acquisition built to tight latency budgets.</p>
+                    <div class="service-tags"><span>Unity3D</span><span>C# / HLSL</span><span>Motion capture</span></div>
+                    <a class="service-proof" href="vr-system.html">Case study: rodent VR under 20 ms <span class="arrow">&rarr;</span></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+                    </div>
+                    <h3>Neural &amp; Behavioral Data Analysis</h3>
+                    <p>Calcium imaging, behavioral video, and large multimodal datasets turned into defensible results with modeling, dimensionality reduction, and clear figures.</p>
+                    <div class="service-tags"><span>Calcium imaging</span><span>Scikit-learn</span><span>UMAP</span></div>
+                    <a class="service-proof" href="https://doi.org/10.1016/j.cub.2022.06.009">Published in Current Biology <span class="arrow">&rarr;</span></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M6.5 12s2-4 5.5-4 5.5 4 5.5 4-2 4-5.5 4-5.5-4-5.5-4z"/><circle cx="12" cy="12" r="1.5"/></svg>
+                    </div>
+                    <h3>Computer Vision &amp; Machine Learning</h3>
+                    <p>Segmentation, tracking, and detection pipelines for microscopy and behavioral video, built to run with minimal hand-tuning.</p>
+                    <div class="service-tags"><span>PyTorch</span><span>OpenCV</span><span>Real-time</span></div>
+                    <a class="service-proof" href="projects.html#cell-segmentation">Automated cell segmentation <span class="arrow">&rarr;</span></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 8h8M8 12h5"/></svg>
+                    </div>
+                    <h3>LLM &amp; Retrieval Tools</h3>
+                    <p>Retrieval-augmented assistants that make large, messy document collections searchable and useful to domain experts.</p>
+                    <div class="service-tags"><span>LangChain</span><span>ChromaDB</span><span>RAG</span></div>
+                    <a class="service-proof" href="https://huggingface.co/spaces/mk-mccann/Permacore">Try the Permacore demo <span class="arrow">&rarr;</span></a>
+                </article>
+
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 9v3a3 3 0 0 0 3 3H14"/></svg>
+                    </div>
+                    <h3>Data Pipelines &amp; Research Software</h3>
+                    <p>Reproducible, version-controlled workflows that take terabytes from raw acquisition to final figure, documented so your team can keep running them.</p>
+                    <div class="service-tags"><span>Snakemake</span><span>Python</span><span>Git</span></div>
+                    <a class="service-proof" href="projects.html#neural-analysis">TB-scale PhD analysis pipeline <span class="arrow">&rarr;</span></a>
+                </article>
+            </div>
+
+            <div class="services-cta">
+                <p><strong>Have a project in mind?</strong> A short call is the quickest way to find out whether I can help.</p>
+                <a href="https://calendly.com/m_k_mccann-proton/30min" class="btn btn-primary">Schedule a Call</a>
             </div>
         </div>
     </section>
@@ -77,18 +214,14 @@
             
             <div class="experience-item">
                 <h3>Founder and Scientific Consultant - DeepBio Analytics LLC</h3>
-                    <p class="date">May 2025 - Present</p>
-                    <p>Founder of DeepBio Analytics, a data science and scientific consulting practice serving biotech and neuroscience research teams. I help clients design robust experimental protocols, analyze complex biological data, and build custom software for research workflows.
+                    <p class="date">May 2025 - Present | Incorporated May 2026</p>
+                    <p>Founder of DeepBio Analytics, a data science and scientific consulting practice serving biotech and neuroscience research teams. I help clients design robust experimental protocols, analyze complex biological data, and build custom software, computer vision, and LLM tools for research workflows. I began consulting independently in May 2025 and incorporated the practice as DeepBio Analytics LLC in May 2026.
                     </p>
                     <p><br /></p>
                     <p>This work draws directly on my PhD and postdoc research at the Max Planck Institute for Biological Intelligence, where I built real-time computer-vision and VR pipelines, built experimental setups from sensors to data acquisition, and modeled neural activity across imaging, video, and behavioral datasets.
                     </p>
-            </div>
-
-            <div class="experience-item">
-                <h3>Freelance Data Scientist</h3>
-                <p class="date">May 2025 - Present</p>
-                <p>Developing computer vision and LLM solutions.</p>
+                    <p><br /></p>
+                    <p><strong>Current engagement:</strong> working with a client at Cornell University.</p>
             </div>
 
             <div class="experience-item">
@@ -97,7 +230,7 @@
                 <p>Built immersive VR environments and ML pipelines to investigate how the brain integrates vision and body motion.</p>
                 <p><br /></p>
                 <p><strong>Selected Achievements:</strong></p>
-                <ul style="list-style-type: disc; padding-left: 40px;"></ul>
+                <ul style="list-style-type: disc; padding-left: 40px;">
                     <li>Developed a real-time VR system with sub-20ms latency for freely moving rodents.</li>
                     <li>Applied machine learning techniques to analyze large-scale neural and behavioral datasets, uncovering insights into sensory integration in the visual cortex.</li>
                     <li>Featured in Werner Herzog's documentary <a href="https://www.imdb.com/title/tt21998502/">"Theatre of Thought"</a> and the 
@@ -111,7 +244,7 @@
                 <p>Developed real-time computer vision pipelines for neuroimaging data and ran 2-photon calcium imaging experiments.</p>
                 <p><br /></p>
                 <p><strong>Selected Achievements:</strong></p>
-                <ul style="list-style-type: disc; padding-left: 40px;"></ul>
+                <ul style="list-style-type: disc; padding-left: 40px;">
                     <li>Second-author publication in Current Biology: <a href="https://doi.org/10.1016/j.cub.2022.06.009">Selective enhancement of neural coding in V1 underlies fine-discrimination learning in tree shrew</a></li>
                 </ul>
             </div>

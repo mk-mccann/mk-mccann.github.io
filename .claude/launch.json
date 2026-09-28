@@ -6,6 +6,12 @@
       "runtimeExecutable": "python3",
       "runtimeArgs": ["-m", "http.server", "8723"],
       "port": 8723
+    },
+    {
+      "name": "static-site-uv",
+      "runtimeExecutable": "uv",
+      "runtimeArgs": ["run", "--no-project", "python", "-m", "http.server", "8723"],
+      "port": 8723
     }
   ]
 }
