@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects - Matt McCann</title>
+    <meta name="description" content="Selected projects by Matt McCann, PhD: real-time VR for neuroscience, large-scale neural data analysis, computer vision for calcium imaging, and LLM tools.">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,73 +21,112 @@
 
     <section>
         <div class="container">
-            <h2>Projects & Demos</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(500px, 100%), 1fr)); gap: 2rem; margin-top: 3rem;">
-                
-                <div class="experience-item" style="border-left: 4px solid #00cc88;">
-                    <h3>Permacore 🌿: RAG Chatbot for Sustainable Development</h3>
-                    <p style="margin: 1rem 0;">A RAG system trained on open-source permaculture and sustainable development
-                        wikis including <a href="https://www.opensourceecology.org/">Open Source Ecology</a> and 
-                        <a href="https://onecommunityglobal.org/">One Community Global</a>. This project aims to help
-                        individuals and ecovillages design regenerative, sustainable food systems, with an eventual scope
-                        including sustainable building and decentralized energy, communication, and water systems.</p>
-                    <p class="date">Tech: Python, ChromaDB, LangChain, MistralAI, Gradio, HuggingFace</p>
-                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                        <a href="https://huggingface.co/spaces/mk-mccann/Permacore" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Live Demo</a>
-                        <a href="https://github.com/mk-mccann/Permacore" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">GitHub</a>
+            <h2>Projects &amp; Demos</h2>
+            <p class="section-lede">
+                Selected work across real-time experimental systems, large-scale data analysis, computer vision, and LLM tools.
+            </p>
+
+            <article class="project-featured" id="vr-system">
+                <a class="project-cover" href="vr-system.html" tabindex="-1" aria-hidden="true">
+                    <img src="assets/arena.jpg" alt="" width="474" height="900" style="object-position: center 82%;">
+                </a>
+                <div class="project-body">
+                    <p class="project-eyebrow">Featured &middot; Real-time systems</p>
+                    <h3><a href="vr-system.html">Real-Time VR System for Freely Moving Rodents</a></h3>
+                    <p>A full-stack VR system processing 6-DOF motion tracking input at 360 FPS. It renders perspective-correct
+                        3D scenes at 120 FPS with under 20 ms detection-to-projection latency, using custom shaders I wrote for
+                        real-time cube mapping and projection transformations.</p>
+                    <div class="project-stats">
+                        <div><strong>360 FPS</strong><span>6-DOF tracking</span></div>
+                        <div><strong>120 FPS</strong><span>3D rendering</span></div>
+                        <div><strong>&lt;20 ms</strong><span>Tracking to projection</span></div>
+                    </div>
+                    <div class="project-tags"><span>Unity3D</span><span>C#</span><span>HLSL</span><span>Python</span></div>
+                    <div class="project-footer">
+                        <p class="project-press">Featured in Werner Herzog's documentary
+                            <a href="https://www.imdb.com/title/tt21998502/">Theatre of Thought</a> and on ZDF's
+                            <a href="https://www.zdf.de/video/reportagen/staffel-2-erinnerung-was-kann-dein-gedaechtnis-mit-jasmina-neudecker-100/so-kannst-du-dein-gedaechtnis-tunen-100">Terra Xplore</a> (German).</p>
+                        <p class="project-note">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                            Code is not public due to institutional restrictions; an earlier version is on GitHub.
+                        </p>
+                        <div class="project-actions">
+                            <a href="vr-system.html" class="btn btn-primary">Read the Write-Up</a>
+                            <a href="https://youtu.be/kuo9TrsrGUE?si=Mxbzablv1pPawCkC" class="btn btn-secondary">Video Demo</a>
+                            <a href="https://github.com/drguggiana/VR_platform" class="btn btn-secondary">GitHub</a>
+                        </div>
                     </div>
                 </div>
+            </article>
 
-                <div class="experience-item" style="border-left: 4px solid #00cc88;">
-                    <h3><a href="vr-system.html">Real-Time VR System for Rodents</a></h3>
-                    <p style="margin: 1rem 0;">A full-stack VR system processing 6-DOF motion tracking input at 360 FPS. 
-                        Rendered perspective-correct 3D scenes at 120 FPS with < 20ms detection to projection latency. 
-                        I implemented custom shaders for real-time cube mapping and projection transformations.
-                    </p>
-                    <p style="margin: 1rem 0;">⚠️ Unfortunately, the code for this project is not publicly available due to institutional 
-                        restrictions, but an earlier version can be found in the link below.
-                    </p>
-                    <p class="date">Tech: Unity3D, C#, HLSL, Python</p> 
-                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                        <a href="https://youtu.be/kuo9TrsrGUE?si=Mxbzablv1pPawCkC" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Video Demo</a>
-                        <a href="https://github.com/drguggiana/VR_platform" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">GitHub</a>
+            <div class="projects-grid">
+                <article class="project-card" id="neural-analysis">
+                    <div class="project-cover project-cover--figure">
+                        <img src="assets/umap-card.jpg" alt="UMAP embeddings colored by tuning index for visual and movement variables, in head-fixed and freely moving mice." width="860" height="484" loading="lazy">
                     </div>
-                    <p style="margin: 1rem 0;">This work was featured in Werner Herzog's documentary "Theatre of Thought" and on the 
-                        ZDF program "Terra Xplore: Was kann Dein Gedächtnis?" (German only)</p>
-                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                        <a href="https://www.imdb.com/title/tt21998502/" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Trailer: Theatre of Thought</a>
-                        <a href="https://www.zdf.de/video/reportagen/staffel-2-erinnerung-was-kann-dein-gedaechtnis-mit-jasmina-neudecker-100/so-kannst-du-dein-gedaechtnis-tunen-100" 
-                           class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">ZDF Terra Xplore</a>
+                    <div class="project-body">
+                        <p class="project-eyebrow">Data analysis</p>
+                        <h3>Large-Scale Correlation Analysis of Neural-Behavioral Relationships</h3>
+                        <p>The core of my PhD. I applied linear and non-linear modeling, correlational analyses, and
+                            dimensionality reduction to understand how the mouse visual cortex integrates vision and body
+                            motion, with an automated Snakemake pipeline handling terabytes of data from preprocessing
+                            through visualization.</p>
+                        <div class="project-tags"><span>Python</span><span>Snakemake</span><span>Scikit-learn</span><span>UMAP-learn</span><span>SciPy</span><span>NumPy</span><span>Pandas</span><span>Git</span></div>
+                        <div class="project-footer">
+                            <p class="project-note">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                                Code is not public due to institutional restrictions; earlier analysis scripts are on GitHub.
+                            </p>
+                            <div class="project-actions">
+                                <a href="https://doi.org/10.5282/edoc.34734" class="btn btn-primary">Dissertation</a>
+                                <a href="https://github.com/drguggiana/prey_capture" class="btn btn-secondary">GitHub</a>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </article>
 
-                <div class="experience-item" id="neural-analysis" style="border-left: 4px solid #ff6b6b;">
-                    <h3>Large-Scale Correlation Analysis of Neural-Behavioral Relationships</h3>
-                    <p style="margin: 1rem 0;">The meat of my PhD. I applied linear and non-linear modeling, 
-                        correlational analyses, and dimensionality reduction methods to understand how the 
-                        brain integrates vision and body motion in the mouse visual cortex. I built an automated processing
-                        pipeline to handle TBs of data from preprocessing through visualization with Snakemake.
-                    </p>
-                    <p style="margin: 1rem 0;">⚠️ Unfortunately, the code for this project is not publicly available due to institutional restrictions, 
-                        but an earlier version of some analysis scripts can be found in the link below.
-                    </p>
-                    <p class="date">Tech: Python, Snakemake, Scikit-learn, UMAP-learn, SciPy, NumPy, Pandas, Git</p>
-                    <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                        <a href="https://github.com/drguggiana/prey_capture" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">GitHub</a>
+                <article class="project-card" id="cell-segmentation">
+                    <div class="project-cover">
+                        <img src="assets/refound-cells-card.jpg" alt="Calcium imaging fields of view from two sessions, with segmented cells outlined and matched across sessions." width="984" height="554" loading="lazy">
                     </div>
-                </div>
+                    <div class="project-body">
+                        <p class="project-eyebrow">Computer vision</p>
+                        <h3>Automated Cell Segmentation &amp; Signal Activity Extraction</h3>
+                        <p>A computer vision pipeline for 1-photon calcium imaging movies. It achieves accurate cell
+                            segmentation and fluorescence signal extraction with minimal user input, including demixing
+                            temporal activity from spatially overlapping cells and re-identifying cells across experimental
+                            sessions.</p>
+                        <div class="project-tags"><span>Python</span><span>OpenCV</span><span>XArray</span><span>NumPy</span><span>SciPy</span><span>MiniAn</span></div>
+                        <div class="project-footer">
+                            <p class="project-note">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                                Code is not public due to institutional restrictions.
+                            </p>
+                        </div>
+                    </div>
+                </article>
 
-                <div class="experience-item" id="cell-segmentation" style="border-left: 4px solid #ffd93d;">
-                    <h3>Automated Cell Segmentation & Signal Activity Extraction</h3>
-                    <p style="margin: 1rem 0;">Computer vision pipeline for 1-photon calcium imaging movies.
-                        Achieved accurate cell segmentation and fluorescence signal extraction with minimal 
-                        user input, including demixing temporal activity from spatially overlapping cells and 
-                        re-identification of cells across experimental sessions.
-                    </p>
-                    <p style="margin: 1rem 0;">⚠️ Unfortunately, the code for this project is not publicly available due to institutional restrictions.</p>
-                    <p class="date">Tech: Python, OpenCV, XArray, NumPy, SciPy, miniAn</p>
-                </div>
-
+                <article class="project-card" id="permacore">
+                    <div class="project-cover project-cover--art" aria-hidden="true">
+                        <span><svg viewBox="0 0 24 24"><path d="M5 20c0-9 5.5-14.5 15-16-1 10-6.5 16-15 16z"/><path d="M5 20l8-8"/></svg></span>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-eyebrow">LLM &amp; retrieval</p>
+                        <h3>Permacore: RAG Chatbot for Sustainable Development</h3>
+                        <p>A RAG system trained on open-source permaculture and sustainable development wikis, including
+                            <a href="https://www.opensourceecology.org/">Open Source Ecology</a> and
+                            <a href="https://onecommunityglobal.org/">One Community Global</a>. It aims to help individuals
+                            and ecovillages design regenerative, sustainable food systems, with an eventual scope including
+                            sustainable building and decentralized energy, communication, and water systems.</p>
+                        <div class="project-tags"><span>Python</span><span>ChromaDB</span><span>LangChain</span><span>MistralAI</span><span>Gradio</span><span>HuggingFace</span></div>
+                        <div class="project-footer">
+                            <div class="project-actions">
+                                <a href="https://huggingface.co/spaces/mk-mccann/Permacore" class="btn btn-primary">Live Demo</a>
+                                <a href="https://github.com/mk-mccann/Permacore" class="btn btn-secondary">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
             </div>
         </div>
     </section>

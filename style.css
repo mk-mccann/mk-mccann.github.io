@@ -184,6 +184,7 @@ h3 a:hover {
     font-weight: 600;
     transition: all 0.3s ease;
     display: inline-block;
+    border: 2px solid transparent;
 }
 
 .btn-primary {
@@ -425,13 +426,15 @@ section h2::after {
     color: var(--text-secondary);
 }
 
-.service-tags {
+.service-tags,
+.project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.4rem;
 }
 
-.service-tags span {
+.service-tags span,
+.project-tags span {
     font-size: 0.78rem;
     padding: 0.2rem 0.65rem;
     border-radius: 999px;
@@ -538,6 +541,227 @@ footer {
 
 .social-links a:hover {
     color: var(--accent);
+}
+
+/* Projects Page */
+.project-featured,
+.project-card {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.project-featured:hover,
+.project-card:hover {
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+    box-shadow: 0 12px 28px var(--shadow);
+}
+
+.project-featured {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    margin-bottom: 2rem;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+}
+
+.project-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+}
+
+.project-cover {
+    display: block;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.project-card .project-cover {
+    aspect-ratio: 16 / 9;
+}
+
+/* The featured photo fills whatever height the text column sets */
+.project-featured .project-cover {
+    position: relative;
+}
+
+.project-featured .project-cover img {
+    position: absolute;
+    inset: 0;
+}
+
+.project-cover img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    transition: transform 0.5s ease;
+}
+
+.project-featured:hover .project-cover img,
+.project-card:hover .project-cover img {
+    transform: scale(1.03);
+}
+
+/* Icon cover for projects without a photo */
+.project-cover--art {
+    display: grid;
+    place-items: center;
+    background:
+        radial-gradient(color-mix(in srgb, var(--accent) 22%, transparent) 1px, transparent 1.5px) 0 0 / 18px 18px,
+        linear-gradient(135deg,
+            color-mix(in srgb, var(--accent) 14%, var(--bg-primary)),
+            color-mix(in srgb, var(--accent-2) 14%, var(--bg-primary)));
+}
+
+.project-cover--art span {
+    display: grid;
+    place-items: center;
+    width: 88px;
+    height: 88px;
+    border-radius: 22px;
+    background: var(--bg-primary);
+    color: var(--accent);
+    box-shadow: 0 8px 24px var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+/* Figures on a white background keep it in both themes, with a divider from the card body */
+.project-cover--figure {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-card:hover .project-cover--art span {
+    transform: scale(1.06);
+}
+
+.project-cover--art svg,
+.project-note svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.project-cover--art svg {
+    width: 44px;
+    height: 44px;
+    stroke-width: 1.5;
+}
+
+.project-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.75rem;
+}
+
+.project-featured .project-body {
+    padding: 2.25rem;
+}
+
+.project-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.project-body h3 {
+    font-size: 1.2rem;
+    line-height: 1.3;
+}
+
+.project-featured .project-body h3 {
+    font-size: 1.6rem;
+}
+
+.project-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.project-stats div {
+    flex: 1 1 0;
+    min-width: 110px;
+    padding: 0.75rem 1rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.project-stats strong {
+    display: block;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    color: var(--accent);
+}
+
+.project-stats span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.project-tags span {
+    background: var(--bg-primary);
+}
+
+.project-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-top: auto;
+    padding-top: 0.25rem;
+}
+
+.project-note,
+.project-press {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.project-note {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+}
+
+.project-note svg {
+    flex-shrink: 0;
+    width: 15px;
+    height: 15px;
+    margin-top: 0.2rem;
+    stroke-width: 2;
+}
+
+.project-press a {
+    color: var(--text-primary);
+}
+
+.project-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.project-actions .btn {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.9rem;
 }
 
 /* Blog / long-form article */
@@ -689,9 +913,11 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 1024px) {
-    .services-grid {
+    .services-grid,
+    .projects-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+
 }
 
 @media (max-width: 768px) {
@@ -755,8 +981,21 @@ footer {
         grid-template-columns: 1fr;
     }
 
-    .services-grid {
+    .services-grid,
+    .projects-grid {
         grid-template-columns: 1fr;
+    }
+
+    .project-featured {
+        grid-template-columns: 1fr;
+    }
+
+    .project-featured .project-cover {
+        aspect-ratio: 1 / 1;
+    }
+
+    .project-featured .project-body {
+        padding: 1.75rem;
     }
 
     .services-cta {
